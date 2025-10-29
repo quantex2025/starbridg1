@@ -9,10 +9,14 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@700,600,500&display=swap" rel="stylesheet">
     <style>
       body {
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Inter', sans-serif;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-family: 'Clash Display', sans-serif;
       }
       html {
         scroll-behavior: smooth;
@@ -21,20 +25,20 @@
         width: 8px;
       }
       ::-webkit-scrollbar-track {
-        background: #0a192f;
+        background: #070B15;
       }
       .dark ::-webkit-scrollbar-track {
-        background: #0a192f;
+        background: #070B15;
       }
       .light ::-webkit-scrollbar-track {
-        background: #f0f3f8;
+        background: #F6F9FC;
       }
       ::-webkit-scrollbar-thumb {
-        background: #00bcd4;
+        background: #00E5FF;
         border-radius: 4px;
       }
       ::-webkit-scrollbar-thumb:hover {
-        background: #7f5af0;
+        background: #8758FF;
       }
 
       /* Animations */
@@ -50,11 +54,11 @@
       }
       
       .dark .animated-gradient-bg {
-        background-image: linear-gradient(-45deg, #0a192f, #1f2937, #7f5af0, #0a192f);
+        background-image: linear-gradient(-45deg, #070B15, #1f2937, #8758FF, #070B15);
       }
       
       .light .animated-gradient-bg {
-        background-image: linear-gradient(-45deg, #ffffff, #f0f3f8, #e0d9fa, #d4f8fc);
+        background-image: linear-gradient(-45deg, #ffffff, #F6F9FC, #e6deff, #d4f8fc);
       }
 
       @keyframes fadeInUp {
@@ -65,6 +69,20 @@
       .fade-in-up {
         animation: fadeInUp 0.8s ease-out forwards;
       }
+      
+      /* Particle animation */
+      @keyframes move-particles {
+        0% { transform: translate(0, 0); }
+        100% { transform: translate(var(--x-end), var(--y-end)); }
+      }
+
+      .particle {
+        position: absolute;
+        border-radius: 50%;
+        background: #00E5FF;
+        animation: move-particles 20s linear infinite;
+        opacity: 0;
+      }
     </style>
     <script>
       tailwind.config = {
@@ -72,15 +90,22 @@
         theme: {
           extend: {
             colors: {
+              'deep-space-navy': '#070B15',
+              'neon-cyan': '#00E5FF',
+              'royal-violet': '#8758FF',
+              'mist-white': '#F6F9FC',
+              // Legacy for compatibility
               'midnight-blue': '#0a192f',
               'electric-cyan': '#00bcd4',
               'silver-gray': '#cfd8dc',
-              'neon-purple': '#7f5af0',
-              'soft-white': '#f0f3f8',
-              'charcoal-gray': '#1f2937',
             },
             fontFamily: {
-              sans: ['Poppins', 'sans-serif'],
+              sans: ['Inter', 'sans-serif'],
+              display: ['Clash Display', 'sans-serif'],
+            },
+            boxShadow: {
+              'glow-cyan': '0 0 20px theme(colors.neon-cyan)',
+              'glow-violet': '0 0 20px theme(colors.royal-violet)',
             },
           },
         },

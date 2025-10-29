@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { CodeIcon, AiIcon, WebIcon, ServerIcon, AutomationIcon, DataScienceIcon, InstagramIcon, LinkedInIcon, MailIcon } from './components/icons/Icons';
 
@@ -12,32 +11,32 @@ export const NAV_LINKS = [
 
 export const SERVICES = [
   {
-    icon: <CodeIcon className="w-10 h-10" />,
+    icon: <CodeIcon className="w-10 h-10 text-neon-cyan" />,
     title: 'Custom Software Development',
     description: 'Tailored software solutions to meet your unique business needs, from startups to enterprises.',
   },
   {
-    icon: <AiIcon className="w-10 h-10" />,
+    icon: <AiIcon className="w-10 h-10 text-neon-cyan" />,
     title: 'AI & Data Science',
     description: 'Leverage AI for smart automation, predictive analytics, and data-driven decision-making tools.',
   },
   {
-    icon: <WebIcon className="w-10 h-10" />,
+    icon: <WebIcon className="w-10 h-10 text-neon-cyan" />,
     title: 'Web Development',
     description: 'Full-stack websites and web apps built with modern technologies like React, Next.js, and Node.js.',
   },
   {
-    icon: <ServerIcon className="w-10 h-10" />,
+    icon: <ServerIcon className="w-10 h-10 text-neon-cyan" />,
     title: 'Backend Systems',
     description: 'Scalable APIs, robust microservices, and seamless cloud integrations for powerful applications.',
   },
   {
-    icon: <AutomationIcon className="w-10 h-10" />,
+    icon: <AutomationIcon className="w-10 h-10 text-neon-cyan" />,
     title: 'Automation Solutions',
     description: 'Streamline your operations with our process automation services using Python, RPA, and AI agents.',
   },
   {
-    icon: <DataScienceIcon className="w-10 h-10" />,
+    icon: <DataScienceIcon className="w-10 h-10 text-neon-cyan" />,
     title: 'Predictive Analytics',
     description: 'Unlock future trends and insights from your data to gain a competitive advantage in your market.',
   },
