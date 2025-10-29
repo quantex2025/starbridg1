@@ -1,0 +1,33 @@
+# render.yaml
+# This configuration is for deploying a static React (Vite) frontend.
+# The server section is commented out but provided as a blueprint for when you add a backend.
+
+services:
+  - type: web
+    name: starbridge-client
+    env: static
+    # A subdirectory or the root of your repo that contains the client-side code
+    rootDir: . 
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    # Optional: Add any environment variables required by your build process here
+    # envVars:
+    #   - key: VITE_API_BASE_URL
+    #     value: https://your-backend-url.onrender.com
+
+  # --- Optional Server Configuration ---
+  # Uncomment the following section when you are ready to deploy a backend service.
+  # Make sure your server code is in a `server` directory.
+  # - type: web
+  #   name: starbridge-server
+  #   env: node
+  #   rootDir: server
+  #   buildCommand: npm install
+  #   startCommand: node index.js
+  #   envVars:
+  #     - key: SENDGRID_API_KEY
+  #       sync: false # Keep secret
+  #     - key: GOOGLE_SHEET_WEBHOOK
+  #       sync: false # Keep secret
+  #     - key: CLIENT_URL
+  #       value: https://your-frontend-url.onrender.com

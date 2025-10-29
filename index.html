@@ -70,19 +70,76 @@
         animation: fadeInUp 0.8s ease-out forwards;
       }
       
-      /* Particle animation */
-      @keyframes move-particles {
-        0% { transform: translate(0, 0); }
-        100% { transform: translate(var(--x-end), var(--y-end)); }
+      /* New Particle Animation */
+      @keyframes particle-flow {
+        0% { transform: translate(0, 0); opacity: 0; }
+        20% { opacity: 1; }
+        80% { opacity: 1; }
+        100% { transform: translate(var(--x-end), var(--y-end)); opacity: 0; }
       }
 
       .particle {
         position: absolute;
         border-radius: 50%;
-        background: #00E5FF;
-        animation: move-particles 20s linear infinite;
+        background: radial-gradient(circle, #00E5FF 0%, rgba(0, 229, 255, 0) 60%);
+        animation: particle-flow linear infinite;
         opacity: 0;
       }
+
+      /* Curved Section Separator */
+      .section-separator {
+        position: relative;
+        height: 100px; /* Adjust height as needed */
+        width: 100%;
+        overflow: hidden;
+      }
+      .section-separator svg {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+      }
+
+      /* Glassmorphism Card Hover Effect */
+      .glass-card {
+          position: relative;
+          background: rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          transition: transform 0.3s, box-shadow 0.3s;
+      }
+      .dark .glass-card {
+        background: rgba(15, 23, 42, 0.3); /* dark background */
+        border: 1px solid rgba(129, 140, 153, 0.2);
+      }
+      .light .glass-card {
+        background: rgba(246, 249, 252, 0.5); /* light background */
+        border: 1px solid rgba(200, 200, 200, 0.4);
+      }
+      
+      .glass-card::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          border-radius: 0.5rem; /* match card's border-radius */
+          border: 2px solid transparent;
+          background: linear-gradient(45deg, #8758FF, #00E5FF) border-box;
+          -webkit-mask:
+              linear-gradient(#fff 0 0) padding-box,
+              linear-gradient(#fff 0 0);
+          -webkit-mask-composite: destination-out;
+          mask-composite: exclude;
+          opacity: 0;
+          transition: opacity 0.3s;
+      }
+      .glass-card:hover::before {
+          opacity: 1;
+      }
+
     </style>
     <script>
       tailwind.config = {
@@ -104,8 +161,8 @@
               display: ['Clash Display', 'sans-serif'],
             },
             boxShadow: {
-              'glow-cyan': '0 0 20px theme(colors.neon-cyan)',
-              'glow-violet': '0 0 20px theme(colors.royal-violet)',
+              'glow-cyan': '0 0 25px rgba(0, 229, 255, 0.6)',
+              'glow-violet': '0 0 25px rgba(135, 88, 255, 0.6)',
             },
           },
         },
@@ -116,13 +173,15 @@
   "imports": {
     "react/": "https://aistudiocdn.com/react@^19.2.0/",
     "react": "https://aistudiocdn.com/react@^19.2.0",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/"
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react-dom": "https://aistudiocdn.com/react-dom@^19.2.0"
   }
 }
 </script>
 </head>
   <body>
     <div id="root"></div>
+    <div id="modal-root"></div>
     <script type="module" src="/index.tsx"></script>
   </body>
 </html>

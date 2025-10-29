@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from 'react';
+import ReactDOM from 'react-dom';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Services from './components/Services';
 import Portfolio from './components/Portfolio';
+import CaseStudyDetail from './components/CaseStudyDetail';
+import Testimonials from './components/Testimonials';
 import About from './components/About';
 import FAQ from './components/FAQ';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import { StarIcon, ArrowUpIcon } from './components/icons/Icons';
+import { CASE_STUDIES } from './constants';
+import type { CaseStudy } from './constants';
 
 const ScrollToTopButton: React.FC<{isVisible: boolean}> = ({ isVisible }) => {
   const scrollToTop = () => {
@@ -27,11 +32,11 @@ const ScrollToTopButton: React.FC<{isVisible: boolean}> = ({ isVisible }) => {
   );
 };
 
-
 const App: React.FC = () => {
   const [theme, setTheme] = useState('dark');
   const [loading, setLoading] = useState(true);
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [selectedCaseStudy, setSelectedCaseStudy] = useState<CaseStudy | null>(null);
 
   useEffect(() => {
     document.documentElement.classList.add('dark');
@@ -39,11 +44,7 @@ const App: React.FC = () => {
     const timer = setTimeout(() => setLoading(false), 2000);
 
     const handleScroll = () => {
-      if (window.scrollY > 300) {
-        setShowScrollTop(true);
-      } else {
-        setShowScrollTop(false);
-      }
+      setShowScrollTop(window.scrollY > 300);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -65,6 +66,15 @@ const App: React.FC = () => {
       document.documentElement.classList.add('light');
     }
   };
+  
+  const handleOpenCaseStudy = (caseStudy: CaseStudy) => {
+    setSelectedCaseStudy(caseStudy);
+  };
+  
+  const handleCloseCaseStudy = () => {
+    setSelectedCaseStudy(null);
+  };
+
 
   if (loading) {
     return (
@@ -81,13 +91,18 @@ const App: React.FC = () => {
       <main className="container mx-auto px-6 md:px-12">
         <Hero />
         <Services />
-        <Portfolio />
+        <Portfolio onCaseStudyClick={handleOpenCaseStudy} />
+        <Testimonials />
         <About />
         <FAQ />
         <Contact />
       </main>
       <Footer />
       <ScrollToTopButton isVisible={showScrollTop} />
+      {selectedCaseStudy && ReactDOM.createPortal(
+        <CaseStudyDetail caseStudy={selectedCaseStudy} onClose={handleCloseCaseStudy} />,
+        document.getElementById('modal-root')!
+      )}
     </div>
   );
 };
